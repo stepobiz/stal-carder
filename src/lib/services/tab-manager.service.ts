@@ -9,9 +9,6 @@ import { StalTab } from '../class/tab.class';
 import { ITabTree } from '../class/tree.class';
 import { OpeningType } from '../enum/opening-type.enum';
 
-
-
-
 export class CardUrlIsHomeError extends Error { }
 
 @Injectable({ providedIn: 'root' })
@@ -84,7 +81,7 @@ export class TabManagerService {
 		// Clean cards
 		let cards = [];
 		{
-			let cardsDb = await lastValueFrom(this.dbService.getAllByIndex('card', 'tab', tabId));
+			let cardsDb = await lastValueFrom(this.dbService.getAllByIndex('card', 'tabId', tabId));
 			if (cardsDb !== undefined) {
 				for await (const cardDb of cardsDb) {
 					let card = new StalCard(cardDb);
@@ -207,8 +204,9 @@ export class TabManagerService {
 				let tabs: StalTab[] = [];
 				for await (const tabDb of tabsDb) {
 					let tab = new StalTab(tabDb);
-					let mainCard: StalCard = new StalCard(await lastValueFrom(this.dbService.getByIndex('card', 'tab', +tab.id)));
-					mainCard.tab = tab;
+					let cardDb = await lastValueFrom(this.dbService.getByIndex('card', 'tabId', +tab.id));
+					let mainCard: StalCard = new StalCard(cardDb);
+					mainCard.tabId = tab.id;
 					tab.mainCard = mainCard;
 					tabs.push(tab);
 					_tabsDb[tab.id] = tab;
@@ -224,8 +222,6 @@ export class TabManagerService {
 				let cards: StalCard[] = [];
 				for await (const cardDb of cardsDb) {
 					let card = new StalCard(cardDb);
-					let tabAny: any = cardDb;
-					card.tab = _tabsDb[tabAny.tab];
 					cards.push(card)
 				}
 				newTabTree.cards = cards;
@@ -247,7 +243,7 @@ export class TabManagerService {
 	}
 
 	private async activateCard(card: StalCard) {
-		await this.updateConfig("activeTab", ""+card.tab.id);
+		await this.updateConfig("activeTab", ""+card.tabId);
 		await this.updateConfig("activeCard", ""+card.id);
 
 		this.loadFromDb();
@@ -288,8 +284,8 @@ export class TabManagerService {
 			
 			let loadedTab = await this.searchTab(url);
 			if(loadedTab !== undefined) {
-				let mainCard: StalCard = new StalCard(await lastValueFrom(this.dbService.getByIndex('card', 'tab', +loadedTab.id)));
-				mainCard.tab = loadedTab;
+				let mainCard: StalCard = new StalCard(await lastValueFrom(this.dbService.getByIndex('card', 'tabId', +loadedTab.id)));
+				mainCard.tabId = loadedTab.id;
 				loadedTab.mainCard = mainCard;
 				this._cardActivation = mainCard;
 			}
@@ -345,8 +341,8 @@ export class TabManagerService {
 			// Controlla se esiste già una tab con quell'url
 			let loadedTab = await this.searchTab(cardRequest.url);
 			if(loadedTab !== undefined) {
-				let mainCard: StalCard = new StalCard(await lastValueFrom(this.dbService.getByIndex('card', 'tab', +loadedTab.id)));
-				mainCard.tab = loadedTab;
+				let mainCard: StalCard = new StalCard(await lastValueFrom(this.dbService.getByIndex('card', 'tabId', +loadedTab.id)));
+				mainCard.tabId = loadedTab.id;
 				loadedTab.mainCard = mainCard;
 				return mainCard;
 			}
@@ -357,12 +353,12 @@ export class TabManagerService {
 		}
 
 		let card: StalCard = new StalCard(await lastValueFrom(this.dbService.add('card', {
-			tab: tabParent.id,
+			tabId: tabParent.id,
 			url: cardRequest.url,
 			isMain: isMain
 		})));
 
-		card.tab = tabParent;
+		card.tabId = tabParent.id;
 
 		return card;
 	}

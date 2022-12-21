@@ -1,9 +1,9 @@
-import { StalCard } from "./card.class";
+import { IStalCard, StalCard } from "./card.class";
 
 export interface IStalTab {
 	id?: number;
 	url: string;
-	mainCard?: StalCard;
+	mainCard?: IStalCard;
 }
 
 export class StalTab implements IStalTab {

@@ -4,14 +4,14 @@ export interface IStalCard {
 	id?: number;
 	url: string;
 	isMain?: boolean;
-	tab?: StalTab;
+	tabId?: number;
 }
 
 export class StalCard implements IStalCard {
 	id: number;
 	url: string;
 	isMain: boolean;
-	tab: StalTab;
+	tabId: number;
 
 	constructor(obj: any) { //ITablerCard
 		if(obj.url === undefined) {
@@ -19,10 +19,10 @@ export class StalCard implements IStalCard {
 		}
 		this.url = obj.url;
 
-		if(obj.tab === undefined) {
-			throw new Error('No tab in obj');
+		if(obj.tabId === undefined) {
+			throw new Error('No tabId in obj');
 		}
-		this.tab = obj.tab;
+		this.tabId = obj.tabId;
 
 		if(obj.isMain === undefined) {
 			this.isMain = false;

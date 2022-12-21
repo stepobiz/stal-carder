@@ -11,7 +11,7 @@ import { IsChildPipe } from './pipes/is-child.pipe';
 
 
 const dbConfig: DBConfig = {
-    name: 'sta-carder',
+    name: 'stal-carder',
     version: 1,
     objectStoresMeta: [
         {
@@ -40,7 +40,7 @@ const dbConfig: DBConfig = {
     migrationFactory() {
         return {
             1: (db: any, transaction: any) => {
-                transaction.objectStore('card').createIndex('tab', 'tab', { unique: false });
+                transaction.objectStore('card').createIndex('tabId', 'tabId', { unique: false });
                 transaction.objectStore('tab').createIndex('url', 'url', { unique: false });
                 transaction.objectStore('config').createIndex('name', 'name', { unique: true });
             }
@@ -53,7 +53,7 @@ const dbConfig: DBConfig = {
         CommonModule,
         RouterModule,
         NgxIndexedDBModule.forRoot(dbConfig),
-        
+
     ],
     providers: [
         TabManagerService,
@@ -70,4 +70,4 @@ const dbConfig: DBConfig = {
 
     ],
 })
-export class CarderModule { }
+export class StalCarderModule { }

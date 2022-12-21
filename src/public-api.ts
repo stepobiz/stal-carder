@@ -9,4 +9,4 @@ export { TablerTabsListComponent } from './lib/components/tab-list/tabs-list.com
 export { OpeningType } from './lib/enum/opening-type.enum';
 export { IsChildPipe } from './lib/pipes/is-child.pipe';
 export { CardUrlIsHomeError, TabManagerService } from './lib/services/tab-manager.service';
-export { CarderModule } from './lib/carder.module';
+export { StalCarderModule } from './lib/carder.module';

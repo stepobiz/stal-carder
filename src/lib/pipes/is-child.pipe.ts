@@ -13,7 +13,7 @@ export class IsChildPipe implements PipeTransform {
 		}
 		let filteredCards: StalCard[] = [];
 		for (let card of cards) {
-			if(card.tab !== undefined && card.tab.id == tab.id) {
+			if(card.tabId == tab.id) {
 				filteredCards.push(card);
 			}
 		}
