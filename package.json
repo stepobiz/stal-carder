@@ -1,9 +1,19 @@
 {
-  "name": "carder",
+  "name": "@stal/carder",
   "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stepobiz/stal-carder.git"
+  },
+  "author": {
+    "name": "Cavallaro Catello Stefano",
+    "email": "stefano@tepo.biz",
+    "url": "https://stepo.biz"
+  },
   "peerDependencies": {
-    "@angular/common": "^14.2.0",
-    "@angular/core": "^14.2.0"
+    "@angular/common": "^14.0.0",
+    "@angular/core": "^14.0.0",
+    "ngx-indexed-db": "^11.0.2"
   },
   "dependencies": {
     "tslib": "^2.3.0"
