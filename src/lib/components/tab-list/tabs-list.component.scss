@@ -1,0 +1,51 @@
+#tabler {
+    position: relative;
+
+    .tb-list{
+        position: relative;
+        overflow: auto;
+    }
+
+    #tb-tab-list{
+        
+    }
+
+    #tb-card-list{
+        margin-top: 5px;
+    }
+
+    .active {
+        color: red;
+        border-color: red !important;
+
+        span {
+            color: red;
+        }
+    }
+
+    .tb-box {
+        position: relative;
+        float: left;
+        
+        padding: 3px;
+        border: solid 1px blue;
+
+    }
+
+    .tb-element {
+        max-width: 200px;
+        
+        i {
+            margin-left: 10px;
+            color: white;
+        }
+    }
+
+    .tb-tab {
+        margin: 0 0 0 5px;
+    }
+    
+    .tb-card {
+        margin: 0 5px 0 0;
+    }
+}
