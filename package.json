@@ -1,6 +1,6 @@
 {
   "name": "@stal/carder",
-  "version": "15.0.0-SNAPSHOT",
+  "version": "15.0.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/stepobiz/stal-carder.git"
