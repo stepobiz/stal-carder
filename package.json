@@ -11,8 +11,8 @@
     "url": "https://stepo.biz"
   },
   "peerDependencies": {
-    "@angular/common": "^14.0.0",
-    "@angular/core": "^14.0.0",
+    "@angular/common": "^15.0.0",
+    "@angular/core": "^15.0.0",
     "ngx-indexed-db": "^11.0.2"
   },
   "dependencies": {
